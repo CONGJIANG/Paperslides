@@ -1,0 +1,74 @@
+---
+title: "Presentation Ninja"
+subtitle: "with xaringan"
+author: "Cong Jiang"
+date: "2020/07/14"
+output:
+  xaringan::moon_reader:
+    yolo: true
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+???
+
+Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)
+
+
+---
+Another slide.
+---
+
+class: center, inverse
+background-image:url("images/cool.png")
+#New Slide
+
+content
+
+$\eta(x)$
+
+---
+background-image: url("`r xaringan:::karl`")
+background-position: center
+background-size: contain
+
+.center[![description of the image](images/foo.png)]
+
+---
+
+# Two dashes
+
+The easiest way to build incremental slides is...
+--
+ to use two dashes `--` to separate content on a slide.
+
+--
+
+You can divide a slide in _any way you want_.
+
+--
+
+- One bullet
+
+- Another bullet
+
+--
+
+- And one more
+- try again
+--
+
+.center[
+![Saw](https://slides.yihui.name/gif/saw-branch.gif)
+
+Don't saw your slides too hard.
+]
+
+xaringan::inf_mr()

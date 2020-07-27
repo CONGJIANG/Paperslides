@@ -1,0 +1,37 @@
+---
+title: "Variational Inference (VI)"
+subtitle: "Self study notes"
+author: "Cong Jiang"
+date: "2020/07/18"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+For a probabilistic model problem, the frequentist solve the optimization questions, while the Bayesian solve the integral questions. 
+
+--
+
+Bayesian Inference refers to solve the posterior distribution of the parameters $$p(\theta | X) = \frac{p(X|\theta)p(\theta)}{p(x)}$$
+--
+
+#### Bayesian Decision
+From the Bayesian point of view,  for a new data $\hat{x}$, we need to solve: 
+--
+
+$$p(\hat{x}|X) =\int_\theta p(\hat{x},\theta|X)d\theta=\int_\theta p(\theta|X)p(\hat{x}|\theta,X)d\theta$$
+
+--
+
+If this new data is independent dataset $X$, then the Bayesian Decision is the expectation of the distribution with respect to the posterior distribution. 
+--
+
+
+The key point of Bayesian Inference is solving the posterior distribution of the parameters and can be divided as (1) Accurate Inference. (2) Approximation Inference. 
+
+Approximation Inference includes certain approximation (VI) and random approximation (MCMC, MH, Gibbs). 
+---
+
+

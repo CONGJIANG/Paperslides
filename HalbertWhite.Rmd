@@ -1,0 +1,108 @@
+---
+title: "Maximum Likelihood Estimation of Misspecified Models"
+subtitle: "Author: Halbert White"
+author: "summrized by cong jiang"
+date:
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: false
+
+
+---
+class: middle, center
+background-image:url("images/cool.png")
+
+
+"This is a very frustrating paper."
+
+
+---
+
+# White’s real contributions:
+
+--
+
+- A unified approach
+
+
+--
+
+- More restrictive, yet more intuitive and easily checked conditions
+
+
+--
+
+
+- Some new statistics and tests
+
+
+## Assumptions
+--
+
+- A1 defines the structure which generates the observations.
+  - $U_t$ data vectors
+
+--
+
+- A2 
+  - $f(u, \theta)$, model density function
+  - define the quasi-log-likelihood of the sample
+  - Existence Theorem
+
+--
+
+- A3 ensures KLIC is well-defined
+  - Consistency Theorem
+
+
+
+---
+# Theorem
+
+Given assumptions $$\sqrt{n}\left(\hat{\theta}_{M L E}-\theta_{K L C}\right) \rightarrow_{d} N\left(0, \mathbf{C}\left[\theta_{K L I C}\right]\right)$$
+
+--
+
+- MLE converges to the Kullback-Leibler Information Criterion-minimizing parameter
+
+
+--
+
+- Form of the asymptotic covariance matrix? 
+
+--
+
+  - A Sandwich Estimator!
+
+---
+# Covariance Matrix Formula
+
+$$\mathbf{A}(\theta)=E\left[\frac{\partial^{2} \log \left(f\left(U_{t}, \theta\right)\right)}{\partial \theta_{i} \partial \theta_{j}}\right]$$
+$$\mathbf{B}(\theta)=E\left[\frac{\partial \log \left(f\left(U_{t}, \theta\right)\right)}{\partial \theta_{i}} \frac{\partial \log \left(f\left(U_{t}, \theta\right)\right)}{\partial \theta_{j}}\right]$$
+$$\mathbf{C}(\theta)=\mathbf{A}(\theta)^{-1} \mathbf{B}(\theta) \mathbf{A}(\theta)^{-1}$$
+
+
+
+
+
+
+
+---
+class:center
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+Slides are created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+
+The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](http://yihui.org/knitr), and [R Markdown](https://rmarkdown.rstudio.com).
+
+
+???
+
+Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)

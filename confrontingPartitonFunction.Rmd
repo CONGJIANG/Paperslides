@@ -1,0 +1,22 @@
+---
+title: "Confronting Partiton Function"
+subtitle: ""
+author: "Cong Jiang"
+date: "2020/07/14"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+# Partition Funciton
+
+Motivation: Learning, evaluation
+
+$x \in \mathbb{R}^p$, $\{0, 1\}^p$, 
+
+在学习和推断中，对于一个概率的归一化因子很难处理，这个归一化因子和配分函数相关。假设一个概率分布：
+$$
+p(x|\theta)=\frac{1}{Z(\theta)}\hat{p}(x|\theta),\ Z(\theta)=\int\hat{p}(x|\theta)dx
+$$
