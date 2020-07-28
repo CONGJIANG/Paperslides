@@ -1,5 +1,5 @@
 ---
-title: "PATH"
+title: "Further Explore PATH --- Causal Inference with Interference"
 subtitle:
 author: "Cong Jiang"
 date: "2020/07/25"
@@ -14,20 +14,36 @@ output:
 
 class: inverse
 background-image:url("images/cool.png")
+# Introduction
+Overlap weights have four statistical advantages: 1) Minimum variance of the nonparametric estimator among all balancing weights; 
+--
+2) Exact balance for means of included covariates in logistic propensity score model;
+--
+ 3) Weights are bounded (unlike IPW);
+--
+ 4) Avoids ad hoc eliminating cases: continuously down-weigh units in the tail.
+
+--
+
+"absolute value" weights from Wallace and Moodie 2015 are identical to overlap weights. 
+
+--
+
+However, in my knowledge, overlap weights with interference receive little attention in the literature.
+
 ### Propensity score weighted-estimators with interference 
-Based on the interference inference framework of Liu et al. 2016, in the light of overlap weights (Li et al. 2018), we first have some definition of causal effects in the presence of interference, then investigate propensity weights with interference, especially overlap weights with interference. 
+Based on the interference inference framework of Liu et al. 2016, also in the light of overlap weights (Li et al. 2018), we first have some definition of causal effects in the presence of interference, then investigate propensity weights with interference, especially overlap weights with interference. 
 
 
 ---
 
 class: inverse
 background-image:url("images/cool.png")
-# Concepts (Liu et al. 2016)
-$\pi\left(s_{i} ; \phi\right)=\phi^{\Sigma s_{i}}(1-\phi)^{\left|s_{i}\right|-\Sigma s_{i}}$: the probability of the interference set for individual $i$ receiving treatment $s_i$ under allocation strategy $\phi$.
-
---
+## Concepts (Liu et al. 2016)
 
 $\pi\left(a_{i} ; \phi\right)=\phi^{a_{i}}(1-\phi)^{1-a_{i}}$: the probability of individual $i$ receiving treatment $a_i$. 
+--
+$\pi\left(s_{i} ; \phi\right)=\phi^{\Sigma s_{i}}(1-\phi)^{\left|s_{i}\right|-\Sigma s_{i}}$: the probability of the interference set for individual $i$ receiving treatment $s_i$ under allocation strategy $\phi$.
 
 --
 
@@ -39,38 +55,40 @@ $\bar{y}_{i}(a, \phi)=\sum_{s_{i}} y_{i}\left(a_{i}=a, s_{i}\right) \pi\left(s_{
 
 $\bar{y}(a, \phi)=\sum_{i=1}^{n} \bar{y}_{i}(a, \phi) / n$ : the population average potential outcome. 
 
----
-
-class: inverse
-background-image:url("images/cool.png")
 $\bar{y}_{i}(\phi)=\sum_{a_{i}, s_{i}} y_{i}\left(a_{i}, s_{i}\right) \pi_{i}\left(a_{i}, s_{i} ; \phi\right)$: the marginal average potential outcome for individual $i$ under allocation strategy $\phi$,
 
 --
 and $\bar{y}(\phi)=\sum_{i=1}^{n} \bar{y}_{i}(\phi) / n$ is defined as the population marginal average potential outcome. 
---
 
-## Causal Effects
-contrasts in the population average potential outcomes. 
+---
 
---
+class: inverse
+background-image:url("images/cool.png")
 
-the direct effect of treatment under allocation strategy $\phi$: $\overline{\mathrm{DE}}(\phi)=g\{\bar{y}(1, \phi), \bar{y}(0, \phi)\}$, where $g(x_1, x_2)$ is some continuous contrast function, such as $g\left(x_{1}, x_{2}\right)=x_{1}-x_{2}$, $g\left(x_{1}, x_{2}\right)=1 - x_{1}/x_{2}$
-
---
-
-The direct effect compares the average potential outcomes when an individual receives treatment versus not under allocation strategy $\phi$. 
+### Causal Effects: contrasts in the population average potential outcomes. 
 
 --
-
-For two allocation strategies $\phi_1$ and $\phi_2$, the indirect or spillover effect, which contrasts average potential outcomes when individuals do not receive treatment under different allocation strategies, is defined as $\overline{\mathrm{IE}}\left(\phi_{1}, \phi_{2}\right)=g\left\{\bar{y}\left(0, \phi_{1}\right), \bar{y}\left(0, \phi_{2}\right)\right\}$. Could also be defined for when individuals receive treatment, $a = 1$. 
+The direct effect of treatment under allocation strategy $\phi$: $\overline{\mathrm{DE}}(\phi)=g\{\bar{y}(1, \phi), \bar{y}(0, \phi)\}$, where $g(x_1, x_2)$ is some continuous contrast function, such as $g\left(x_{1}, x_{2}\right)=x_{1}-x_{2}$, $g\left(x_{1}, x_{2}\right)=1 - x_{1}/x_{2}$
 
 --
 
-The total effect, $\overline{\mathrm{TE}}\left(\phi_{1}, \phi_{2}\right)=g\left\{\bar{y}\left(1, \phi_{1}\right), \bar{y}\left(0, \phi_{2}\right)\right\}$,  incorporates both direct and indirect effects, and reflects the difference between the average potential outcomes when individuals receive treatment under one allocation strategy versus when they go without treatment under another allocation strategy. 
+$\textit{The direct effect}$ compares the average potential outcomes when an individual receives treatment versus not under allocation strategy $\phi$. 
 
 --
 
-Overall effect, $\overline{\mathrm{OE}}\left(\phi_{1}, \phi_{2}\right)=g\left\{\bar{y}\left(\phi_{1}\right), \bar{y}\left(\phi_{2}\right)\right\}$, describes the contrast in average outcomes under one allocation strategy relative to another. 
+For two allocation strategies $\phi_1$ and $\phi_2$, the $\textit{indirect or spillover effect}$, which contrasts average potential outcomes when individuals do not receive treatment under different allocation strategies, is defined as $\overline{\mathrm{IE}}\left(\phi_{1}, \phi_{2}\right)=g\left\{\bar{y}\left(0, \phi_{1}\right), \bar{y}\left(0, \phi_{2}\right)\right\}$. Could also be defined for when individuals receive treatment, $a = 1$. 
+
+---
+class: inverse
+background-image:url("images/cool.png")
+
+# Causal Effects
+
+The $\textit{total effect}$, $\overline{\mathrm{TE}}\left(\phi_{1}, \phi_{2}\right)=g\left\{\bar{y}\left(1, \phi_{1}\right), \bar{y}\left(0, \phi_{2}\right)\right\}$,  incorporates both direct and indirect effects, and reflects the difference between the average potential outcomes when individuals receive treatment under one allocation strategy versus when they go without treatment under another allocation strategy. 
+
+--
+
+$\textit{Overall effect}$, $\overline{\mathrm{OE}}\left(\phi_{1}, \phi_{2}\right)=g\left\{\bar{y}\left(\phi_{1}\right), \bar{y}\left(\phi_{2}\right)\right\}$, describes the contrast in average outcomes under one allocation strategy relative to another. 
 
 
 ---
@@ -79,19 +97,19 @@ background-image:url("images/cool.png")
 # ESTIMATORS
 --
 
-Estimators of the population average outcome for treatment z and allocation
+Estimators of the population average outcome for treatment $a$ and allocation
 strategy $\phi$ are
 $$\hat{Y}^{w}(a, \phi) = \frac{\sum_{i} w_{A_i, S_i}(x_i, \mathbb{x_i}) y_{i}(A_{i}, S_{i}) 1(A_{i}=a)} {\sum_{i} w_{A_i, S_i}(x_i, \mathbb{x_i})1 (A_{i}=a) }$$
+???
+IWP estimators of the population average outcome for treatment $a$ and allocation strategy $\phi$ is $w_{A_i, S_i}(x_i, \mathbb{x_i}) = 1/f\left(A_{i}, S_{i} \mid x_i, \mathbb{x_i}\right)$
 --
 
-IWP estimators of the population average outcome for treatment $a$ and allocation strategy $\phi$ is $w_{A_i, S_i}(x_i, \mathbb{x_i}) = 1/f\left(A_{i}, S_{i} \mid x_i, \mathbb{x_i}\right)$
-
-Hájek-type estimators of the population average outcome for treatment $a$ and allocation strategy $\phi$ is $w_{A_i, S_i}(x_i, \mathbb{x_i}) = \pi\left(S_{i} ; \phi\right)/f\left(A_{i}, S_{i} \mid x_i, \mathbb{x_i}\right)$
+Hájek-type IPW estimators of the population average outcome for treatment $a$ and allocation strategy $\phi$ is $w_{A_i, S_i}(x_i, \mathbb{x_i}) = \pi\left(S_{i} ; \phi\right)/f\left(A_{i}, S_{i} \mid x_i, \mathbb{x_i}\right)$
 
 
 --
 Generally, we have 
-$$w_{A_i, S_i}(x_i, \mathbb{x_i}) = h(x_i, \mathbb{x_i}) /f\left(A_{i}, S_{i} \mid x_i, \mathbb{x_i}\right)$$
+$$w_{A_i, S_i}(x_i, \mathbb{x_i}) = h_{S_i}(x_i, \mathbb{x_i}) /f\left(A_{i}, S_{i} \mid x_i, \mathbb{x_i}\right)$$
 
 ---
 class: inverse
@@ -102,16 +120,17 @@ background-image:url("images/cool.png")
 estimators of the population average marginal outcome
 for allocation strategy $\phi$ are
 $$\hat{Y}^{w}(\phi) = \frac{\sum_{i} w_{A_i, S_i}(x_i, \mathbb{x_i}) y_{i}(A_{i}, S_{i})} {\sum_{i} w_{A_i, S_i}(x_i, \mathbb{x_i}) }$$
+
+???
+IWP estimators of the population average marginal outcome for treatment $a$ and allocation strategy $\phi$ is $w_{A_i, S_i}(x_i, \mathbb{x_i}) = 1/f\left(A_{i}, S_{i} \mid x_i, \mathbb{x_i}\right)$
 --
 
-IWP estimators of the population average marginal outcome for treatment $a$ and allocation strategy $\phi$ is $w_{A_i, S_i}(x_i, \mathbb{x_i}) = 1/f\left(A_{i}, S_{i} \mid x_i, \mathbb{x_i}\right)$
-
-Hájek-type estimators of the population average marginal outcome for treatment $a$ and allocation strategy $\phi$ is $w_{A_i, S_i}(x_i, \mathbb{x_i}) = \pi\left(A_{i},S_{i} ; \phi\right)/f\left(A_{i}, S_{i} \mid x_i, \mathbb{x_i}\right)$
+Hájek-type IPW estimators of the population average marginal outcome for treatment $a$ and allocation strategy $\phi$ is $$w_{A_i, S_i}(x_i, \mathbb{x_i}) = \pi\left(A_{i},S_{i} ; \phi\right)/f\left(A_{i}, S_{i} \mid x_i, \mathbb{x_i}\right)$$
 
 
 --
 Generally, we have 
-$$w_{A_i, S_i}(x_i, \mathbb{x_i}) = h(x_i, \mathbb{x_i}) /f\left(A_{i}, S_{i} \mid x_i, \mathbb{x_i}\right)$$
+$$w_{A_i, S_i}(x_i, \mathbb{x_i}) = h_{A_i, S_i}(x_i, \mathbb{x_i}) /f\left(A_{i}, S_{i} \mid x_i, \mathbb{x_i}\right)$$
 
 
 ---
@@ -119,14 +138,17 @@ $$w_{A_i, S_i}(x_i, \mathbb{x_i}) = h(x_i, \mathbb{x_i}) /f\left(A_{i}, S_{i} \m
 class: inverse
 background-image:url("images/cool.png")
 
+Want to show: consistency of weighted estimators
 
+--
 
+If $f\left(A_{i}, S_{i} \mid x_i, \mathbb{x_i}\right)$ is known for all $i$, then $\mathbb{E}[\hat{Y}^{w}(a, \phi)] =  \bar{y}(a,\phi)$ and $\mathbb{E}[\hat{Y}^{w}(\phi)] = \bar{y}(\phi)$
 
 ---
 
 class: inverse
 background-image:url("images/cool.png")
-
+# Doubly Robust Estimators
 
 
 ---
